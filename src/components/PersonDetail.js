@@ -17,12 +17,6 @@ function PersonDetail(props) {
         localStorage.setItem('person', JSON.stringify(moreInfoPerson))
     }
 
-
-
-
-
-    console.log(moreInfoPerson)
-
     function getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min)) + min;
     }
