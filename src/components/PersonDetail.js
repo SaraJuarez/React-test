@@ -1,11 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Chart from 'react-google-charts';
 import MapContainer from './Map';
 
 
 function PersonDetail(props) {
+
     let moreInfoPerson =
         props.list.find(user => user.login.uuid === props.match.params.id)
+
+    if (moreInfoPerson === undefined) {
+        let getInfoUser = localStorage.getItem('person')
+        let getInfoUserObject = JSON.parse(getInfoUser)
+        moreInfoPerson = getInfoUserObject;
+    }
+    else if (moreInfoPerson != undefined) {
+        localStorage.setItem('person', JSON.stringify(moreInfoPerson))
+    }
+
+
+
+
+
+    console.log(moreInfoPerson)
+
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
 
     return (
 
@@ -28,13 +48,13 @@ function PersonDetail(props) {
                     loader={<div>Loading Chart</div>}
                     data={[
                         ['Día', 'Horas de sueño'],
-                        ['Lunes', 5],
-                        ['Martes', 7],
-                        ['Miércoles', 8],
-                        ['Jueves', 5],
-                        ['Viernes', 6],
-                        ['Sábado', 10],
-                        ['Domingo', 8],
+                        ['Lunes', getRandomInt(1, 15)],
+                        ['Martes', getRandomInt(1, 15)],
+                        ['Miércoles', getRandomInt(1, 15)],
+                        ['Jueves', getRandomInt(1, 15)],
+                        ['Viernes', getRandomInt(1, 15)],
+                        ['Sábado', getRandomInt(1, 15)],
+                        ['Domingo', getRandomInt(1, 15)],
                     ]}
                     options={{
                         title: 'Horas de sueño a la semana',
